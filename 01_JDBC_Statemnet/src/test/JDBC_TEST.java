@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class TestRun {
+public class JDBC_TEST {
 	public static void main(String[] args) {
 		System.out.println();
 
@@ -28,24 +28,15 @@ public class TestRun {
 
 		// 1.각자 pc(localhost)에 JDBC계정에 연결 후 test테이블에 insert 하기
 		// INSERT문 => 처리된 행수 (int)=> 트랜젝션 처리
-		
+
 		Scanner sc = new Scanner(System.in);
 		System.out.print("번호 : ");
 		int num = sc.nextInt();
-		
+
 		sc.nextLine();
-		
-		System.out.print("id : ");
-		String id = sc.nextLine();
-		
-		System.out.print("패스워드 : ");
-		String pwd = sc.nextLine();
-		
+
 		System.out.print("이름 : ");
 		String name = sc.nextLine();
-		
-		System.out.print("날짜 : ");
-		String  date = sc.nextLine();
 		// 필요한 변수들 먼저 세팅
 		int result = 0; // 결과(처리된 행수)를 받아줄 변수
 		Connection conn = null; // DB의 연결정보를 보관할 객체
@@ -54,7 +45,7 @@ public class TestRun {
 		// 앞으로 실행할 sql문 ("완성형태"로 만들어두기)
 
 		//String sql = "INSERT INTO TEST VALUES(1,'차은우',SYSDATE)";
-		String sql = "INSERT INTO TEST VALUES(" + num + ", '" +id +", '" +pwd+ ", '" + name + ", '" +date+"')"; 
+		String sql = "INSERT INTO TEST VALUES(" + num + ", '" + name + "' , SYSDATE)"; 
 
 		// 1)jdbc driver 등록
 		try {
