@@ -8,8 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+<<<<<<< HEAD:01_JDBC_Statemnet/src/test/TestRun.java
 public class TestRun {
 
+=======
+public class JDBC_TEST {
+>>>>>>> 2184006ff8da1e29ec93c05ffef29fe8ad11fea4:01_JDBC_Statemnet/src/test/JDBC_TEST.java
 	public static void main(String[] args) {
 		
 		/*
@@ -32,18 +36,25 @@ public class TestRun {
 		 * 
 		 * 7) 다 사용한 jdbc객체를 반드시 자원 반납!! 안하면 디비 락 걸림!! (close) => 생성된 역순으로!!
 		 */
+<<<<<<< HEAD:01_JDBC_Statemnet/src/test/TestRun.java
 		
 		/*
 		// 1. 각자 pc(localhost)에 JDBC계정을 연결한 후 TEST 테이블에 INSERT 해보기
 		// insert문 => 처리된 행 수 (int) => 트랜젝션 처리
 		
+=======
+
+		// 1.각자 pc(localhost)에 JDBC계정에 연결 후 test테이블에 insert 하기
+		// INSERT문 => 처리된 행수 (int)=> 트랜젝션 처리
+
+>>>>>>> 2184006ff8da1e29ec93c05ffef29fe8ad11fea4:01_JDBC_Statemnet/src/test/JDBC_TEST.java
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("번호 : ");
 		int num = sc.nextInt();
-		
+
 		sc.nextLine();
-		
+
 		System.out.print("이름 : ");
 		String name = sc.nextLine();
 		
