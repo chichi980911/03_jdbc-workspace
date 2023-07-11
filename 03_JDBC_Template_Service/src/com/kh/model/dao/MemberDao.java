@@ -78,7 +78,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<Member> selectList(Connection conn,ArrayList<Member> m) {
+	public ArrayList<Member> selectList( Connection conn) {
 		// select문(여러행) = ResultSet 객체
 		ArrayList<Member> list = new ArrayList<Member>(); // 텅빈 리스트
 
@@ -97,6 +97,8 @@ public class MemberDao {
 			// >빈공간을 실제값 (사용자가 입력한 값)으로 채워준 후 실행
 
 			rset = pstmt.executeQuery();
+			
+			
 
 			while (rset.next()) {
 				list.add(new Member(rset.getInt("userno"), rset.getString("userid"), rset.getString("userpwd"),

@@ -29,12 +29,14 @@ public class MemberService {
 
 
 	
-	public ArrayList<Member> selectList(list){
+	public ArrayList<Member> selectList(){
 		//1.jdbc driver 등록
 		//2.connection 객체 생성
 		
 		Connection conn = /*JDBCTemplate.*/getConnection();
-		ArrayList<Member> m = new MemberDao().selectList(conn,m);
+		ArrayList<Member> list = new MemberDao().selectList(conn);
+		
+		return list;
 	}
 }
 

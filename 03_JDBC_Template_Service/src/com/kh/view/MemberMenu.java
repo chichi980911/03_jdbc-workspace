@@ -69,7 +69,7 @@ public class MemberMenu {
 //				아래 deleteId 사용하지 않고 case3에서 사용한 id 입력받는 메서드 재사용 가능
 //				String deleteId = deleteMemberId();
 //				mc.deleteMember(deleteId);
-				mc.deleteMember(deleteMemberId());
+//				mc.deleteMember(deleteMemberId());
 				
 //				String userId = inputMemberId();
 //				mc.deleteMember2(userId);
@@ -225,16 +225,16 @@ public class MemberMenu {
 	public void displayMemberList(ArrayList<Member> list) {
 		System.out.println("조회된 결과 데이터 입니당.");
 		
-		//단순 for 문
-//		for(int i =0; i<list.size(); i++) {
-//			System.out.println(list.get(i));
-//		}
-		
-		//향상된 for 문 for each 문
-		for(Member m:list) {//m = > list.get(0), m => list.get(1)
-			System.out.println(m);
-			
+//		단순 for 문
+		for(int i =0; i<list.size(); i++) {
+			System.out.println(list.get(i));
 		}
+		
+//		//향상된 for 문 for each 문
+//		for(Member m:list) {//m = > list.get(0), m => list.get(1)
+//			System.out.println(m);
+			
+//		}
 	}
 	/**조회 서이브 요청시 조회결과가 한 행일 경우 사용자가 보게 될 응답화면
 	 * @param m

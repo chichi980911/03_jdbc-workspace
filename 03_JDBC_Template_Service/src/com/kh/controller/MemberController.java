@@ -42,9 +42,11 @@ public class MemberController {
 	 * 사용자의 회원 전체 조회 요청 처리 메서드
 	 */
 	public void selectList() {
-		ArrayList<Member> list = new MemberService().selectList(list);
+		ArrayList<Member> list = new MemberService().selectList();
+		
 		
 		//조회 결과가 있는지 없는지 판단 후 사용자가 보게 될 응답화면 지정
+		
 		if(list.isEmpty()) {
 			new MemberMenu().displayNodata("조회된 결과가 없습니다.");
 		}else {
@@ -79,13 +81,13 @@ public class MemberController {
 	 * 회원 탈퇴 요청 처리해준 메서드
 	 * @param deleteId 탈퇴 시키고자 하는 회원아이디
 	 */
-	public void deleteMember(String deleteId) {
-		new MemberDao().deleteMember(deleteId);
-		
+//	public void deleteMember(String deleteId) {
+//		new MemberDao().deleteMember(deleteId);
+//		
 		
  //내가 작성
 		
-	}
+//	}
 	
 //	public void deleteMember2(String deleteId) {
 //		new MemberDao().deleteMember2(deleteId);
