@@ -223,7 +223,7 @@ public class MemberMenu {
 	 * @param list
 	 */
 	public void displayMemberList(ArrayList<Member> list) {
-		System.out.println("조회된 결과 데이터 입니다.");
+		System.out.println("조회된 결과 데이터 입니당.");
 		
 		//단순 for 문
 //		for(int i =0; i<list.size(); i++) {
