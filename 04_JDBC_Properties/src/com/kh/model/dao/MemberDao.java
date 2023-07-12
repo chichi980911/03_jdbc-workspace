@@ -1,5 +1,7 @@
 package src.com.kh.model.dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -8,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Set;
 
 import src.com.kh.common.JDBCTemplate;
@@ -17,24 +20,32 @@ import src.com.kh.model.vo.Member;
 //JDBC작업 하는곳 Controller에서 받아온 데이터를 DB에서 작업 후 결과를 다시 Controller로 다시 리턴
 
 public class MemberDao {
+	//=====================================================
 
 	/*
-	 * Statement 와 PreparedStatment의 특징 - 둘 다 sql문 실행하고 결과를 받아내는 객체(둘 중 하나 쓰면 된다)
+	 * 기존의 방식 : DAO 클래스를 사용자가 요청할 때마다 실행해야하는 SQL문을 자바소스코드 내에 명시적으로 작성 => 정적코딩발식
 	 * 
-	 * - Statement와 PreparedStatement의 차이점 - Statement 같은 경우 sql문을 바로 전달하면서 실행시키는 객체
-	 * (즉 sql문을 완성 형태로 만들어줘야한다. 사용자가 입력한 값이 다 채워진 형태로) >기존의 Statement 방식
-	 * 1)Connection 객체를 통해 Statement 객체 생성 (conn.createStatement();) 2)Statement 객체를
-	 * 통해 "완성된 sql 문" 실행 및 결과 받기 결과 = stmt.excuteXXX (완성된 sql);
+	 * >문제점 : SQL문을 수정해야 할 경우 자바 소스코드를 수정해야한다 => 수정된 내용을 반영시키고자 한다면 반드시 프로그램을 재기동 해야함
 	 * 
-	 * -PreparedStateement 같은 경우 "미완성된 sql문을 잠시 보관해둘 수 있는 객체" (즉, 사용자가 입력한 값들을 채워두지
-	 * 않고 각각 들어갈 공간만 확보를 미리 해놓아도 된다) 단, 해당 sql문이 본격적으로 실행하기 전에는 빈 공간을 사용자가 입력한 값으로
-	 * 채워서 실행하긴 해야한다.
-	 * 
-	 * >preparedStatement 방식 1)Connection 객체를 통해 PreparedStatement 객체 생성 : pstmt =
-	 * conn.preparedStatement(미완성된 sql문); 2)pstmt에 담긴 sql문이 미완성 상태일 경우 우선 완성시켜야함.
-	 * pstmt.setXXX(1, "대체할 값"); 3)해당 완성된 sql문을 실행 결과 받기 결과는 = pstmt.executeXXX();
-	 */
+	 * >해결방식 : SQL문을 별도로 관리하는 외부파일 (.xml)을 만들어서 실시간으로 파일에 기록된 sql문을 읽어 들여서 실행 => 동적 코딩방식
+	 * 			여러줄 쓸 수 있도록 => xml로 하는게 좋다.
+	 * */
 
+	
+	private Properties prop = new Properties();
+	
+	public MemberDao() {
+		try {
+			prop.loadFromXML(new FileInputStream("resources/query.xml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	//=====================================================
 	/**
 	 * 회원추가 메서드
 	 * 
@@ -49,7 +60,7 @@ public class MemberDao {
 		
 		PreparedStatement pstmt = null;
 
-		String sql = "INSERT INTO MEMBER VALUES(SEQ_USERNO.NEXTVAL,?,?,?,?,?,?,?,?,?,SYSDATE)";
+		String sql = prop.getProperty("insertMember");
 
 		try {
 			//3) PreparedStatement 객체 생성
@@ -78,6 +89,8 @@ public class MemberDao {
 		return result;
 	}
 
+	
+	//
 	public ArrayList<Member> selectList( Connection conn) {
 		// select문(여러행) = ResultSet 객체
 		ArrayList<Member> list = new ArrayList<Member>(); // 텅빈 리스트
@@ -86,7 +99,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = "SELECT * FROM MEMBER";
+		String sql = prop.getProperty("selectList");
 
 		
 
@@ -130,7 +143,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = "SELECT * FROM MEMBER WHERE USERID = ?";
+		String sql = prop.getProperty("selectByUserId");
 
 		try {
 			
@@ -167,7 +180,7 @@ public class MemberDao {
 
 //		String sql = "SELECT * FROM MEMBER WHERE USERNAME LIKE '%' || ? || '%'"; 해결방법1
 
-		String sql = "SELECT * FROM MEMBER WHERE USERNAME LIKE ?";
+		String sql = prop.getProperty("selectByUserName2");
 
 		try {
 			
@@ -201,7 +214,7 @@ public class MemberDao {
 
 		
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE MEMBER SET USERPWD = ?, EMAIL =?, PHONE = ?, ADDRESS = ? WHERE USERID = ?";
+		String sql = prop.getProperty("updateMember");
 
 		try {
 			
@@ -228,7 +241,7 @@ public class MemberDao {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM MEMBER WHERE USERID = '|| ? ||'";
+		String sql = prop.getProperty("updateMember");
 		
 		
 		

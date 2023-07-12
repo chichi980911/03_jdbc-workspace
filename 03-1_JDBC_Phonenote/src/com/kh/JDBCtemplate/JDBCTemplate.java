@@ -1,4 +1,4 @@
-package src.com.kh.common;
+package com.kh.JDBCtemplate;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,33 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-//공통 템플릿 (매번 반복적으로 작성할 코드를 메서드로 정의해둔다)
-
 public class JDBCTemplate {
-
-	//모든 메서드 전부 ststic 메서드
-	//이건 실행되자마자 메모리 영역에 다 올라감
-	//싱글톤 패턴 : 메모리 영역에 단 한번만 올려두고 매번 재사용 하는 개념 (Math 클래스 같은거...)
 	
 	/**
-	 * 1.Connection 객체 생성 (DB와 접속) 한 후 해당 Connection 객체 반환해주는 메서드
+	 * 1.Connection 객체 생성(DB와 접속) 한 후 해당 Connection 객체를 반환해주는 메서드
 	 * @return
 	 */
+	
 	public static Connection getConnection() {
-		
 		Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","JDBC","JDBC");
-			
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ABC","ABC");
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}return conn;
-		
 	}
 	
 	/**
@@ -103,4 +95,7 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 }

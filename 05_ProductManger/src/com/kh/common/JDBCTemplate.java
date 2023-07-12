@@ -1,40 +1,44 @@
-package src.com.kh.common;
+package com.kh.common;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-//공통 템플릿 (매번 반복적으로 작성할 코드를 메서드로 정의해둔다)
+import java.util.Properties;
 
 public class JDBCTemplate {
 
-	//모든 메서드 전부 ststic 메서드
-	//이건 실행되자마자 메모리 영역에 다 올라감
-	//싱글톤 패턴 : 메모리 영역에 단 한번만 올려두고 매번 재사용 하는 개념 (Math 클래스 같은거...)
-	
 	/**
 	 * 1.Connection 객체 생성 (DB와 접속) 한 후 해당 Connection 객체 반환해주는 메서드
 	 * @return
 	 */
 	public static Connection getConnection() {
+Connection conn = null;
 		
-		Connection conn = null;
+		Properties prop = new Properties();
+	
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			prop.load(new FileInputStream("resources/driver.properties"));
 			
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","JDBC","JDBC");
+			Class.forName(prop.getProperty("driver"));
 			
+			
+			conn = DriverManager.getConnection(prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}return conn;
-		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} return conn;
 	}
-	
 	/**
 	 * 2.Commit 처리해주는 메서드 (Connection 전달받아서)
 	 * @param conn
@@ -103,4 +107,6 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
