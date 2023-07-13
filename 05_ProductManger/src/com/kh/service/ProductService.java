@@ -37,12 +37,19 @@ public class ProductService {
 		return result;
 		
 	}
-	public int deleteProduct(String pid) {
+	public int deleteProduct(Product p) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new ProductDao().deleteProduct(conn,pid);
+		int result = new ProductDao().deleteProduct(conn,p);
 		
 		JDBCTemplate.close(conn);
 		return result;
+	}
+	public ArrayList<Product> keywordProduct(Product p) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = 	new ProductDao().keywordProduct(conn,p);
+		JDBCTemplate.close(conn);
+		return list;
+				
 	}
 	 
 }

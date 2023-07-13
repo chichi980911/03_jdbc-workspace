@@ -45,8 +45,28 @@ public class ProductController {
 			new ProductMenu().displayFail("회원 정보 수정 실패 ");
 		}
 	}
-	public void deleteProduct(String pid) {
-		new ProductService().deleteProduct(pid);
+	public void deleteProduct(String  userid) {
+		Product p = new Product(userid);
+		 int result = new ProductService().deleteProduct(p);
+		 
+		 if(result > 0) {
+				new ProductMenu().displaySuccess("회원 정보 수정 성공");
+			}else {
+				new ProductMenu().displayFail("회원 정보 수정 실패 ");
+			}
+		
+	}
+	
+	public void  keywordProduct(String pname) {
+		Product p = new Product(pname);
+		ArrayList<Product> list = new ProductService().keywordProduct(p);
+		
+		if(list.isEmpty()) {
+			System.out.println("조회 결과가 없습니다.");
+		}else {
+			new ProductMenu().displaylist(list);
+		}
+		
 		
 	}
 

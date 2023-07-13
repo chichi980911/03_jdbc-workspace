@@ -37,14 +37,15 @@ public class ProductMenu {
 				updatep();
 				break;
 			case 4:
-				deletep();
+				String userid = deletep();
+				pc.deleteProduct(userid);
+			case 5: keyProduct();
 				break;
-			case 5:
-				break;
-			case 6:
+			case 0: System.out.println("프로그램을 종료합니다");
 				return;
 			default:
 				System.out.println("메뉴를 잘못입력하셨습니다, 다시 입력해 주세요.");
+				break;
 				
 				
 			}
@@ -85,11 +86,16 @@ public class ProductMenu {
 		
 		pc.updateProduct(pid,pname,pprice,pdes,pst);
 	}
-	public void deletep() {
-		System.out.println("삭제할 상품의 id를 입력하세요 : ");
-		String pid = sc.nextLine();
-		pc.deleteProduct(pid);
+	
+	public String deletep() {
+		System.out.print("삭제할 상품의 id를 입력하세요 : ");
+		 return sc.nextLine();
 		
+	}
+	public void keyProduct() {
+		System.out.print("찾으실 상품의 키워드를 입력하세요 : ");
+		String pname = sc.nextLine();
+		pc.keywordProduct(pname);
 	}
 	
 	

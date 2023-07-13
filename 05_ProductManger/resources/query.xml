@@ -40,6 +40,19 @@
 	
 	</entry>
 	<entry key = "deleteProduct">
+	DELETE FROM PRODUCT
+	WHERE PRODUCT_ID = ?
 	</entry>
+	
+	<entry key = "keywordProduct">
+	SELECT 
+	 			 PRODUCT_ID
+		  		,P_NAME
+		 		,PRICE
+		 		,DESCRIPTION
+		 		,STOCK
+	FROM PRODUCT
+	WHERE P_NAME like '%' || ? || '%'
+	</entry>>
 	
 </properties>

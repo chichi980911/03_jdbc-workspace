@@ -102,7 +102,7 @@ private Properties prop = new Properties();
 		
 	}
 	
-	public int deleteProduct(Connection conn, String pid) {
+	public int deleteProduct(Connection conn, Product p) {
 		PreparedStatement pstmt =null;
 		int result = 0;
 		
@@ -111,12 +111,8 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1,p.getP_Name());
-			pstmt.setInt(2,p.getPrice());
-			pstmt.setString(3,p.getDescription());
-			pstmt.setInt(4, p.getStock());
-			pstmt.setString(5, p.getProduct_Id());
-			
+	
+			pstmt.setString(1,p.getProduct_Id());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -124,6 +120,40 @@ private Properties prop = new Properties();
 		}finally {
 			JDBCTemplate.close(pstmt);
 		}return result;
+	}
+	
+	
+	
+	public ArrayList<Product> keywordProduct(Connection conn, Product p) {
+		PreparedStatement pstmt = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("keywordProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p.getProduct_Id());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Product(rset.getString("product_id"),
+						 rset.getString("p_name"),
+						 rset.getInt("price"),
+						 rset.getString("description"),
+						 rset.getInt("stock")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}return list;
+		
+		
 	}
 	
 

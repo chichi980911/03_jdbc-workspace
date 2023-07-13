@@ -20,6 +20,13 @@ public class Product {
 		this.stock = stock;
 	}
 
+	
+
+	public Product(String product_Id) {
+		super();
+		this.product_Id = product_Id;
+	}
+
 	public String getProduct_Id() {
 		return product_Id;
 	}
