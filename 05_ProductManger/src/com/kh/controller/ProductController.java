@@ -6,6 +6,8 @@ import com.kh.model.vo.Product;
 import com.kh.service.ProductService;
 import com.kh.view.ProductMenu;
 
+
+
 public class ProductController {
 	
 	public void selectList() {
@@ -17,6 +19,34 @@ public class ProductController {
 		}else {
 			new ProductMenu().displaylist(list);
 		}
+		
+	}
+	
+	public void insertProduct(String pid, String pname, String pprice, String pde, String pst) {
+		Product p = new Product(pid,pname,Integer.parseInt(pprice) ,pde,Integer.parseInt(pst));
+		
+		int result = new ProductService().insertProduct(p);
+		
+		if(result > 0) {
+			new ProductMenu().displaySuccess("회원 추가 성공");
+		}else {
+			new ProductMenu().displayFail("회원추가 실패");
+		}
+		
+	}
+	
+	public void updateProduct(String pid, String pname, String pprice, String pdes, String pst) {
+		Product p = new Product(pid,pname,Integer.parseInt(pprice),pdes,Integer.parseInt(pst));
+		int result = new ProductService().updateProduct(p);
+		
+		if(result > 0) {
+			new ProductMenu().displaySuccess("회원 정보 수정 성공");
+		}else {
+			new ProductMenu().displayFail("회원 정보 수정 실패 ");
+		}
+	}
+	public void deleteProduct(String pid) {
+		new ProductService().deleteProduct(pid);
 		
 	}
 

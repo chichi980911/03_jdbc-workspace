@@ -31,10 +31,13 @@ public class ProductMenu {
 				pc.selectList();
 				break;
 			case 2:
+				insertp();
 				break;
 			case 3:
+				updatep();
 				break;
 			case 4:
+				deletep();
 				break;
 			case 5:
 				break;
@@ -48,6 +51,49 @@ public class ProductMenu {
 		}
 	}
 	
+	//사용자가 선택한 메뉴 구현
+	public void insertp() {
+		System.out.print("추가할 상품의 id : ");
+		String pid =sc.nextLine();
+		
+		System.out.print("추가할 상품명 : ");
+		String pname =sc.nextLine();
+		
+		System.out.print("추가할 상품의 가격 : ");
+		String pprice =sc.nextLine();
+		
+		System.out.print("추가할 상품 설명 : ");
+		String pde =sc.nextLine();
+		
+		System.out.print("추가할 상품 재고 : ");
+		String pst =sc.nextLine();
+		
+		pc.insertProduct(pid,pname,pprice,pde,pst);
+	}
+	
+	public void updatep() {
+		System.out.print("변경할 상품의 id를 입력하세요 :");
+		String pid = sc.nextLine();
+		System.out.print("바꿀 상품명 : ");
+		String pname = sc.nextLine();
+		System.out.print("바꿀 상풍의 가격 : ");
+		String pprice = sc.nextLine();
+		System.out.print("바꿀 상품의 설명 : ");
+		String pdes = sc.nextLine();
+		System.out.print("바꿀 상품의 재고 : ");
+		String pst = sc.nextLine();
+		
+		pc.updateProduct(pid,pname,pprice,pdes,pst);
+	}
+	public void deletep() {
+		System.out.println("삭제할 상품의 id를 입력하세요 : ");
+		String pid = sc.nextLine();
+		pc.deleteProduct(pid);
+		
+	}
+	
+	
+	
 	//=========요청 응답
 	
 	public void displaylist(ArrayList<Product> list) {
@@ -56,6 +102,12 @@ public class ProductMenu {
 		for(int i =0; i<list.size(); i++) {
 			System.out.println(list.get(i));
 		}
+	}
+	public void displaySuccess(String message) {
+		System.out.println("\n서비스 요청 성공 " + message);
+	}
+	public void displayFail(String message) {
+		System.out.println("\n서비스 요청 실패 " + message);
 	}
 	
 }

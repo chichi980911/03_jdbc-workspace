@@ -11,5 +11,35 @@
 	  FROM PRODUCT
 	
 	</entry>
+	<entry key = "insertProduct">
+	INSERT 
+	  INTO Product 
+		 		(
+		 		 PRODUCT_ID
+		  	    ,P_NAME
+		  	    ,PRICE
+		  	    ,DESCRIPTION
+		  	    ,STOCK
+		 		)
+		 	VALUES
+		 		(
+		 		 ?
+		 		,?
+		 		,?
+		 		,?
+		 		,?
+				)
+	</entry>
+	<entry key = "updateProduct">
+		UPDATE PRODUCT
+		   SET P_NAME = ?
+		   	 , PRICE = ?
+		   	 , DESCRIPTION = ?
+		   	 , STOCK =?
+		 WHERE PRODUCT_ID = ?
+	
+	</entry>
+	<entry key = "deleteProduct">
+	</entry>
 	
 </properties>

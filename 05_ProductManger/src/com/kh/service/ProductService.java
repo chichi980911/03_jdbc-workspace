@@ -10,6 +10,8 @@ import com.kh.common.JDBCTemplate;
 import com.kh.model.dao.ProductDao;
 import com.kh.model.vo.Product;
 
+import oracle.sql.converter.JdbcCharacterConverters;
+
 public class ProductService {
 
 	
@@ -19,9 +21,28 @@ public class ProductService {
 		
 		
 		return list;
-		
-		
-	
-	
 	}
+	public  int insertProduct(Product p) {
+		Connection conn = JDBCTemplate.getConnection();
+		 int result = new ProductDao().insertProduct(conn,p);
+		
+		 JDBCTemplate.close(conn);
+		 return result;
+	}
+	public int updateProduct(Product p) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ProductDao().updateProduct(conn,p);
+		
+		JDBCTemplate.close(conn);
+		return result;
+		
+	}
+	public int deleteProduct(String pid) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ProductDao().deleteProduct(conn,pid);
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	 
 }

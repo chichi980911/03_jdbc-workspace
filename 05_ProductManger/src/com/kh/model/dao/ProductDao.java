@@ -50,5 +50,81 @@ private Properties prop = new Properties();
 			JDBCTemplate.close(pstmt);
 		}return list;
 	}
+	
+	public int insertProduct(Connection conn, Product p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertProduct");
+		
+		try {
+			pstmt =conn.prepareStatement(sql);
+			
+			pstmt.setString(1,p.getProduct_Id());
+			pstmt.setString(2,p.getP_Name());
+			pstmt.setInt(3,p.getPrice());
+			pstmt.setString(4,p.getDescription());
+			pstmt.setInt(5,p.getStock());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			JDBCTemplate.close(pstmt);
+		}return result;
+		
+		
+	}
+	public int updateProduct(Connection conn,Product p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("updateProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setString(1,p.getP_Name());
+			pstmt.setInt(2,p.getPrice());
+			pstmt.setString(3,p.getDescription());
+			pstmt.setInt(4,p.getStock());
+			pstmt.setString(5,p.getProduct_Id());
+			
+	
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt); 
+		}return result;
+		
+	}
+	
+	public int deleteProduct(Connection conn, String pid) {
+		PreparedStatement pstmt =null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,p.getP_Name());
+			pstmt.setInt(2,p.getPrice());
+			pstmt.setString(3,p.getDescription());
+			pstmt.setInt(4, p.getStock());
+			pstmt.setString(5, p.getProduct_Id());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}return result;
+	}
+	
 
 }
