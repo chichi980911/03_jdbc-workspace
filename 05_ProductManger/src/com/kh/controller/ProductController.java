@@ -57,6 +57,18 @@ public class ProductController {
 		
 	}
 	
+//	public void keywordProduct(String pname) {
+//		Product p = new Product();
+//		ArrayList<Product> list = new ProductService().keywordProduct(p);
+//		
+//		if(list.isEmpty()) {
+//			new ProductMenu().displayFail("검색에 실패했습니다");
+//		}else {
+//			new ProductMenu().displaylist(list);
+//		}
+//	}
+	
+	
 	public void  keywordProduct(String pname) {
 		Product p = new Product(pname);
 		ArrayList<Product> list = new ProductService().keywordProduct(p);
@@ -69,5 +81,6 @@ public class ProductController {
 		
 		
 	}
+	
 
 }

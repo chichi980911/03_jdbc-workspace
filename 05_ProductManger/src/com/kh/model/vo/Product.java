@@ -70,11 +70,10 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [product_Id=" + product_Id + ", p_Name=" + p_Name + ", price=" + price + ", description="
-				+ description + ", stock=" + stock + ", getProduct_Id()=" + getProduct_Id() + ", getP_Name()="
-				+ getP_Name() + ", getPrice()=" + getPrice() + ", getDescription()=" + getDescription()
-				+ ", getStock()=" + getStock() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ description + ", stock=" + stock + "]";
 	}
+
+	
 	
 	
 	

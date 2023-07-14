@@ -27,21 +27,21 @@ public class ProductMenu {
 			sc.nextLine();
 
 			switch (usercho) {
-			case 1:
+			case 1: //전체 조회
 				pc.selectList();
 				break;
-			case 2:
+			case 2: //상품 추가
 				insertp();
 				break;
-			case 3:
+			case 3: //상품 수정
 				updatep();
 				break;
-			case 4:
+			case 4: //상품 삭제
 				String userid = deletep();
 				pc.deleteProduct(userid);
-			case 5: keyProduct();
+			case 5: keyProduct(); //상품 검색
 				break;
-			case 0: System.out.println("프로그램을 종료합니다");
+			case 0: System.out.println("프로그램을 종료합니다"); //프로그램 종료
 				return;
 			default:
 				System.out.println("메뉴를 잘못입력하셨습니다, 다시 입력해 주세요.");
@@ -93,10 +93,11 @@ public class ProductMenu {
 		
 	}
 	public void keyProduct() {
-		System.out.print("찾으실 상품의 키워드를 입력하세요 : ");
+		System.out.print("검색할 상품의 키워드를 입력하세요(p_name중) : ");
 		String pname = sc.nextLine();
 		pc.keywordProduct(pname);
 	}
+	
 	
 	
 	

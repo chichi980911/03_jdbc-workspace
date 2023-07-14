@@ -122,8 +122,6 @@ private Properties prop = new Properties();
 		}return result;
 	}
 	
-	
-	
 	public ArrayList<Product> keywordProduct(Connection conn, Product p) {
 		PreparedStatement pstmt = null;
 		ArrayList<Product> list = new ArrayList<Product>();
@@ -146,7 +144,7 @@ private Properties prop = new Properties();
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(rset);
@@ -155,6 +153,9 @@ private Properties prop = new Properties();
 		
 		
 	}
+	
+	
+	
 	
 
 }

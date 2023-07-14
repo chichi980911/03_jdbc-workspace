@@ -4,13 +4,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Properties;
+
 
 import com.kh.common.JDBCTemplate;
 import com.kh.model.dao.ProductDao;
 import com.kh.model.vo.Product;
 
-import oracle.sql.converter.JdbcCharacterConverters;
+
 
 public class ProductService {
 
@@ -44,12 +44,14 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
 	public ArrayList<Product> keywordProduct(Product p) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Product> list = 	new ProductDao().keywordProduct(conn,p);
+		ArrayList<Product> list =new ProductDao().keywordProduct(conn,p);
+		
 		JDBCTemplate.close(conn);
 		return list;
-				
 	}
+
 	 
 }
